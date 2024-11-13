@@ -1,0 +1,13 @@
+﻿@model ApplicationRole
+@{
+    ViewBag.Title = "ویرایش نقش";
+    ViewBag.Description = "ویرایش نقش";
+    ViewBag.Hidden = true;
+    ViewBag.NoAside = true;
+}
+<h4>ویرایش نقش: @Model.Name</h4>
+<form action="~/admin/editrole/@Model.Id" method="post">
+    <label asp-for="Password" class="form-label">گذرواژه</label>
+    <input asp-for="Password" class="form-input" style="width: 300px;" />
+    <button class="button button-green-back" style="width: 50; margin: 20px;">ویرایش</button>
+</form>

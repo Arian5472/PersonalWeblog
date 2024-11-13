@@ -1,0 +1,17 @@
+﻿@model PostResponseDTO
+
+<div class="box-grey">
+    <img src="~/pics/articles/@(Model.Slug).jpg" alt="تصویر هدر" style="width: 100%; border-radius: 20px; aspect-ratio: 1; object-fit: cover;" />
+    <h3 class="flex" style="margin-bottom: 0px; overflow: hidden; text-overflow: ellipsis; min-height: 54px; max-height: 55px;"><a href="~/posts/@Model.Slug">@Model.Title</a></h3>
+    @if (Model.Admin)
+    {
+        <div style="font-size: 12px; margin: 10px 0px;">از: مدیریت | انتشار: @Model.PubDate!.Value.ToShortDateString()</div>
+    }
+    else
+    {
+        <div style="font-size: 12px; margin: 10px 0px;">از: @Model.Author | انتشار: @Model.PubDate!.Value.ToShortDateString()</div>
+    }
+    <div style="text-overflow: ellipsis; overflow: hidden; min-height: 87px; max-height: 88px;">
+        @Html.Raw(Model.Summary)
+    </div>
+</div>

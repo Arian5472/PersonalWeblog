@@ -1,0 +1,71 @@
+﻿@model UserUpdateDTO
+@{
+    ViewBag.Title = "ویرایش پروفایل";
+    ViewBag.Description = "ویرایش اطلاعات کاربری";
+    ViewBag.Hidden = true;
+}
+
+<h4>اطلاعات جدید را وارد نمایید:</h4>
+
+<form action="~/account/edit" method="post" enctype="multipart/form-data" style="width: 100%; box-sizing: border-box;">
+    <div class="flex w-50">
+        <div class="w-25">
+            <label asp-for="Name" class="form-lable">
+                نام
+            </label>
+        </div>
+        <div class="w-60">
+            <input asp-for="Name" class="form-input" />
+            <span asp-validation-for="Name" style="color:red;"></span>
+        </div>
+    </div>
+    <br />
+    <div class="flex w-50">
+        <div class="w-25">
+            <label asp-for="Email" class="form-lable">
+                ایمیل
+            </label>
+        </div>
+        <div class="w-60">
+            <input asp-for="Email" class="form-input" />
+            <span asp-validation-for="Email" style="color:red;"></span>
+            @if (ViewBag.Duplicated != null)
+            {
+                <span style="color:red;">@ViewBag.Duplicated</span>
+            }
+        </div>
+    </div>
+    <br />
+    <div class="flex w-50">
+        <div class="w-25">
+            <label asp-for="Bio" class="form-lable">
+                بیو
+            </label>
+        </div>
+        <div class="w-60">
+            <textarea asp-for="Bio" type="" class="form-input"></textarea>
+            <span asp-validation-for="Bio" style="color:red;"></span>
+        </div>
+    </div>
+    <br />
+    <div class="flex w-50">
+        <div class="w-25">
+            <label asp-for="Profile" class="form-lable">
+                تصویر پروفایل
+            </label>
+        </div>
+        <div class="w-60">
+            <input asp-for="Profile" class="form-input" accept=".jpg"/>
+            <span asp-validation-for="Profile" style="color:red;"></span>
+            @if (ViewBag.FormatError != null)
+            {
+                <span style="color:red;">@ViewBag.FormatError</span>
+            }
+        </div>
+    </div>
+    <button class="button button-green-back" style="width: 50; margin: 20px;">ویرایش</button>
+</form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" asp-fallback-test="window.jQuery" asp-fallback-src="~/js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js" integrity="sha512-FOhq9HThdn7ltbK8abmGn60A/EMtEzIzv1rvuh+DqzJtSGq8BRdEN0U+j0iKEIffiw/yEtVuladk6rsG4X6Uqg==" crossorigin="anonymous" referrerpolicy="no-referrer" asp-fallback-test="window.jQuery.validator" asp-fallback-src="~/js/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" integrity="sha512-o6XqxgrUsKmchwy9G5VRNWSSxTS4Urr4loO6/0hYdpWmFUfHqGzawGxeQGMDqYzxjY9sbktPbNlkIQJWagVZQg==" crossorigin="anonymous" referrerpolicy="no-referrer" asp-fallback-test="window.jQuery.validator.unobstrusive" asp-fallback-src="~/js/jquery.validate.unobstrusive.min.js"></script>

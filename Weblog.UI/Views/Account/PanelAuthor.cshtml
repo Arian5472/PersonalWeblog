@@ -1,0 +1,84 @@
+﻿@model UserResponseDTO
+@{
+    ViewBag.Title = "پنل";
+    ViewBag.Description = "پنل کاربری";
+    ViewBag.Hidden = true;
+}
+
+<div class="box">
+    <div class="flex">
+        <h4 style="margin-top: 40px;">اطلاعات کاربری</h4>
+        <img src="~/pics/users/@(Model.Id).jpg" alt="پروفایل" style="width: 140px; height: 140px; border-radius: 100%;" />
+    </div>
+    <div>
+        <div style="width: 100%; display: flex; flex-direction: column; justify-content: space-between; box-sizing: border-box;">
+            <div>
+                نام: @Model.Name <br />
+                ایمیل: @Model.Email <br />
+                بیو: @Model.Bio <br />
+            </div>
+            <div style="margin-top: 20px;">
+                <a href="~/account/edit" style="padding: 5px 10px; border-radius: 5px; color: #000; background-color: blue;">ویرایش</a>
+                <a href="~/account/editpassword" style="padding: 5px 10px; border-radius: 5px; color: #000; background-color: yellow;">تغییر گذرواژه</a>
+                <a href="~/account/signout" style="padding: 5px 10px; border-radius: 5px; color: #000; background-color: red;">خروج</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="box">
+    <h4 style="margin-top: 0px">نوشته های من</h4>
+    <div>
+        <a href="~/posts/add" style="padding: 5px 10px; border-radius: 5px; color: #000; background-color: greenyellow;">افزودن</a>
+    </div>
+    <div style="display:flex; flex-direction: row; overflow-x: scroll;">
+        <table>
+            <thead>
+                <th style="width: 25%">عنوان</th>
+                <th style="width: 25%">توضیحات</th>
+                <th style="max-width: 10%">انتشار</th>
+                <th style="max-width: 10%">ویرایش</th>
+                <th style="max-width: 10%">بازدید</th>
+            </thead>
+            @if (ViewBag.Posts != null)
+            {
+                foreach (PostResponseDTO post in ViewBag.Posts)
+                {
+                    <tr>
+                        <td><a href="~/posts/edit/@post.Slug">@post.Title</a></td>
+                        <td>@post.Description</td>
+                        @if(post.Published) { <td>@post.PubDate</td> } else { <td><a href="~/posts/publish/@post.Slug">انتشار</a></td> }
+                        <td>@post.UpDate</td>
+                        <td>@post.View</td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>
+<div class="box">
+    <h4 style="margin-top: 0px">آمار</h4>
+    <div>
+        @{
+            int view = 0;
+            List<PostResponseDTO>? posts = null;
+            List<PostResponseDTO>? topPosts = null;
+            if (ViewBag.Posts != null)
+            {
+                posts = ViewBag.Posts;
+                view = posts.Select(temp => temp.View.Value).Sum();
+                topPosts = posts.OrderByDescending(temp => temp.View).Take(3).ToList();
+            }
+        }
+        تعداد نوشته ها: @if (posts != null) { @posts.Count } <br />
+        مجموع بازدید: @view <br />
+        پربازدید ترین: @if (topPosts != null)
+        {
+            @foreach (var post in topPosts)
+            {
+                <div>
+                    <a href="~/posts/@post.Slug " > @post.Title </a>, @post.View
+                </div>
+            }
+        }
+    </div>
+</div>

@@ -1,0 +1,41 @@
+﻿@model PostResponseDTO
+@{
+    ViewBag.Title = Model.Title;
+    ViewBag.Description = Model.Description;
+    bool noAdmin = true;
+}
+
+<time datetime="@(Model.PubDate!.Value.Year)-@(Model.PubDate.Value.Month)-@(Model.PubDate.Value.Day)"></time>
+<img src="~/pics/articles/@(Model.Slug).jpg" alt="تصویر هدر" style="width: 100%; border-radius: 30px;" />
+<h1>@Model.Title</h1>
+<div>@Html.Raw(Model.Article)</div>
+
+<div style="padding: 17px; border-radius: 10px; margin-top: 20px; background-color: #50056f">
+    <div style="display: flex; margin-left: 15px;">
+        @if (!Model.Admin)
+        {
+            <img src="~/pics/users/@(Model.AuthorId).jpg" alt="پروفایل" style="width: 100px; height: 100px; border-radius: 100%;" />
+        }
+        else
+        {
+            <img src="~/pics/manager.jpg" alt="پروفایل" style="width: 100px; height: 100px; border-radius: 100%;" />
+            noAdmin = false;
+        }
+        
+        <div style="margin-right: 30px; margin-top: 15px;">
+            @if (noAdmin) { <h4><a href="~/posts?authorId=@Model.AuthorId" style="color: inherit;">@Model.Author</a></h4> } else { <h4>مدیریت</h4> }
+        </div>
+    </div>
+    @if(noAdmin) { <div style="margin-top: 20px;">@Model.AuthorBio</div> }
+    <div style="display: flex; width: 100%; flex-wrap: wrap;">
+        <h5 style="margin-right: 10px; margin-left: 5px;">انتشار:</h5>
+        <h5 style="margin-left: 15px;">@Model.PubDate.Value.ToShortDateString()</h5>
+        @if (Model.UpDate != null)
+        {
+            <h5 style="margin-left: 5px;">به‌روزرسانی:</h5>
+            <h5 style="margin-left: 15px;">@Model.UpDate.Value.ToShortDateString()</h5>
+        }
+        <h5 style="margin-left: 5px; margin-right: 10px;">بازدید:</h5>
+        <h5>@Model.View</h5>
+    </div>
+</div>

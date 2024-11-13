@@ -1,0 +1,11 @@
+﻿<div style="font-size: 26px; margin-bottom: 20px;"><b>تازه ترین ها</b></div>
+@foreach (PostResponseDTO post in ViewBag.Newest)
+{
+    @await Html.PartialAsync("PostMinimalPartial", post)
+}
+<br />
+<div style="font-size: 26px; margin-bottom: 20px; margin-top: 40px;"><b>پربازدید ترین ها</b></div>
+@foreach (PostResponseDTO post in ViewBag.MostViewed)
+{
+    @await Html.PartialAsync("PostMinimalPartial", post)
+}

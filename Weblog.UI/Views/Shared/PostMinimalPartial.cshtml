@@ -1,0 +1,19 @@
+﻿@model PostResponseDTO
+
+<div class="flex" style="border-bottom: solid 2px #494c4e; padding-bottom: 10px;">
+    <img src="~/pics/articles/@(Model.Slug).jpg" alt="تصویر هدر" style="max-width:80px; max-height: 80px; aspect-ratio: 1; object-fit: cover; margin-top: 20px; border-radius: 100%;" />
+    <div style="margin-right: 15px; width: 90%;">
+        <h5 style="margin-bottom: 5px;"><a href="~/posts/@Model.Slug">@Model.Title</a></h5>
+        @if (Model.Admin)
+        {
+            <div style="font-size: 12px; margin: 10px 0px;">از: مدیریت | انتشار: @Model.PubDate!.Value.ToShortDateString()</div>
+        }
+        else
+        {
+            <div style="font-size: 12px; margin: 10px 0px;">از: @Model.Author | انتشار: @Model.PubDate!.Value.ToShortDateString()</div>
+        }
+        <div>
+            @if (Model.Summary!.Length < 186) { <p>@Html.Raw(Model.Summary)</p> } else { <p>@Html.Raw(Model.Summary!)</p> } 
+        </div>
+    </div>
+</div>

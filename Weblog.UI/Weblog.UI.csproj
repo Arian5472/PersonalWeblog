@@ -1,0 +1,74 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\ckeditor5\**" />
+    <Compile Remove="wwwroot\pics\articles\users\**" />
+    <Compile Remove="wwwroot\pics\headers\**" />
+    <Content Remove="wwwroot\ckeditor5\**" />
+    <Content Remove="wwwroot\pics\articles\users\**" />
+    <Content Remove="wwwroot\pics\headers\**" />
+    <EmbeddedResource Remove="wwwroot\ckeditor5\**" />
+    <EmbeddedResource Remove="wwwroot\pics\articles\users\**" />
+    <EmbeddedResource Remove="wwwroot\pics\headers\**" />
+    <None Remove="wwwroot\ckeditor5\**" />
+    <None Remove="wwwroot\pics\articles\users\**" />
+    <None Remove="wwwroot\pics\headers\**" />
+    <TypeScriptCompile Remove="wwwroot\ckeditor5\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.7" />
+    <PackageReference Include="Serilog" Version="4.0.1" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Weblog.Core\Weblog.Core.csproj" />
+    <ProjectReference Include="..\Weblog.Infrastructure\Weblog.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Filters\" />
+    <Folder Include="Middlewares\" />
+    <Folder Include="wwwroot\DataProtectionKeys\" />
+    <Folder Include="wwwroot\pics\articles\" />
+    <Folder Include="wwwroot\pics\users\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Account\SignIn.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Account\SignIn.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Posts\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Account\SignIn.cshtml" />
+    <None Include="Views\Posts\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Posts\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Home\NewsLetter.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

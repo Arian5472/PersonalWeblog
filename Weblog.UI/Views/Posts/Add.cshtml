@@ -1,0 +1,128 @@
+﻿@model PostAddDTO
+@{
+    ViewBag.Title = "نوشته‌ی جدید";
+    ViewBag.Description = "افزودن نوشته‌ی جدید به مطالب";
+    ViewBag.Hidden = true;
+    ViewBag.NoAside = true;
+}
+
+<h1>نوشته‌ی جدید</h1>
+<form action="~/posts/add?ap=@ViewBag.ap" method="post" enctype="multipart/form-data">
+    <div>
+        <div class="flex w-50">
+            <div class="w-25">
+                <label asp-for="Slug" class="form-label">
+                    پیوند
+                </label>
+            </div>
+            <div class="w-60">
+                <input asp-for="Slug" class="form-input" />
+                <span asp-validation-for="Slug" style="color: red;"></span>
+                @if (ViewBag.Duplicated != null)
+                {
+                    <span style="color: red;">@ViewBag.Duplicated</span>
+                }
+            </div>
+        </div>
+        <br />
+        <div class="flex w-50">
+            <div class="w-25">
+                <label asp-for="Title" class="form-label">
+                    عنوان
+                </label>
+            </div>
+            <div class="w-60">
+                <input asp-for="Title" class="form-input" />
+                <span asp-validation-for="Title" style="color: red;"></span>
+            </div>
+        </div>
+        <br />
+        <div class="flex w-50">
+            <div class="w-25">
+                <label asp-for="Description" class="form-label">
+                    توضیحات
+                </label>
+            </div>
+            <div class="w-60">
+                <textarea asp-for="Description" class="form-input"></textarea>
+                <span asp-validation-for="Description" style="color: red;"></span>
+            </div>
+        </div>
+        <br />
+
+        <div style="width: 100%; box-sizing: border-box;">
+            <div style="margin-bottom: 15px;">
+                <label asp-for="Article" class="form-label">
+                    متن
+                </label>
+            </div>
+            <div style="width: 100%;">
+                <textarea asp-for="Article"></textarea>
+                <span asp-validation-for="Article" style="color: red;"></span>
+            </div>
+        </div>
+        <br />
+
+        <div class="flex w-50">
+            <div class="w-25">
+                <label asp-for="Published" class="form-label">
+                    انتشار هم اکنون
+                </label>
+            </div>
+            <div class="w-60">
+                <input asp-for="Published" class="form-input" />
+                <span asp-validation-for="Published" style="color: red;"></span>
+            </div>
+        </div>
+        <br />
+
+        <div class="flex w-50">
+            <div class="w-25">
+                <label asp-for="Admin" class="form-label">
+                    انتشار از سوی مدیریت
+                </label>
+            </div>
+            <div class="w-60">
+                <input asp-for="Admin" class="form-input" />
+                <span asp-validation-for="Admin" style="color: red;"></span>
+            </div>
+        </div>
+        <br />
+
+        <div class="flex w-50">
+            <div class="w-25">
+                <label asp-for="Header" class="form-label">
+                    تصویر هدر
+                </label>
+            </div>
+            <div class="w-60">
+                <input asp-for="Header" class="form-input" />
+                <span asp-validation-for="Header" style="color: red;"></span>
+                @if (ViewBag.FormatError != null)
+                {
+                    <span style="color: red;">@ViewBag.FormatError</span>
+                }
+            </div>
+        </div>
+        <br />
+        <button class="button button-green-back" style="width: 50; margin: 20px;">افزودن</button>
+    </div>
+</form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" asp-fallback-test="window.jQuery" asp-fallback-src="~/js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.4/jquery.validate.min.js" integrity="sha512-FOhq9HThdn7ltbK8abmGn60A/EMtEzIzv1rvuh+DqzJtSGq8BRdEN0U+j0iKEIffiw/yEtVuladk6rsG4X6Uqg==" crossorigin="anonymous" referrerpolicy="no-referrer" asp-fallback-test="window.jQuery.validator" asp-fallback-src="~/js/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" integrity="sha512-o6XqxgrUsKmchwy9G5VRNWSSxTS4Urr4loO6/0hYdpWmFUfHqGzawGxeQGMDqYzxjY9sbktPbNlkIQJWagVZQg==" crossorigin="anonymous" referrerpolicy="no-referrer" asp-fallback-test="window.jQuery.validator.unobstrusive" asp-fallback-src="~/js/jquery.validate.unobstrusive.min.js"></script>
+
+<script type="importmap">
+    {
+        "imports": {
+            "ckeditor5": "../../assets/vendor/ckeditor5.js",
+            "ckeditor5/": "../../assets/vendor/"
+        }
+    }
+</script>
+<script type="module" src="~/js/main.js"></script>
+
+@section head {
+    <link rel="stylesheet" href="~/assets/vendor/ckeditor5.css" />
+}

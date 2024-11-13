@@ -1,0 +1,50 @@
+﻿@model List<PostResponseDTO>
+@{
+    ViewBag.Title = "مطالب";
+    ViewBag.Description = "لیست تمامی مطالب موجود";
+    ViewBag.NoAside = true;
+    if (Model != null && Model?.Count != 0) { ViewBag.Count = Model?.Count; } else { ViewBag.Count = 0; }
+}
+
+<h1>مطالب</h1>
+
+<form action="~/posts" method="get">
+    <div class="flex" style="justify-content: start; flex-wrap: wrap;">
+        @if (ViewBag.CSortOrder != -1)
+        {
+            <a href="~/posts?search=@(ViewBag.CSearch)&authorId=@(ViewBag.CAuthorId)&sortOrder=-1"><i class="fa-solid fa-sort-down" style="margin-left: 10px; margin-top: 18px;"></i></a>
+        }
+        else
+        {
+            <a href="~/posts?search=@(ViewBag.CSearch)&authorId=@(ViewBag.CAuthorId)&sortOrder=1"><i class="fa-solid fa-sort-up" style="margin-left: 10px; margin-top: 18px;"></i></a>
+        }
+        <select name="authorId" class="form-input" style="width: 100px; margin-left: 15px; margin-top: 5px;">
+            @foreach (var author in ViewBag.Authors.Keys)
+            {
+                @if (author.ToString() == ViewBag.CAuthorId.ToString())
+                {
+                    <option value=@author.ToString() selected="selected">@ViewBag.Authors[author]</option>
+                }
+                else
+                {
+                    <option value=@author.ToString()>@ViewBag.Authors[author]</option>
+                }
+            }
+        </select>
+        <input type="search" id="search" name="search" placeholder="جست‌و‌جو‌" value=@ViewBag.CSearch class="form-input" style="width: 200px; margin-left: 15px; margin-right: 22px; margin-top: 5px;" />
+        <button class="button button-blue-back" style="margin-top: 5px;">جست‌و‌جو</button>
+    </div>
+</form>
+
+<div>
+    <h3>@(ViewBag.Count??0) نوشته </h3>
+    @if (Model != null)
+    {
+        foreach (PostResponseDTO post in Model)
+        {
+            <div>
+                @await Html.PartialAsync("PostMinimalPartial", post)
+            </div>
+        }
+    }
+</div>

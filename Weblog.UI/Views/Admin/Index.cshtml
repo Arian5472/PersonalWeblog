@@ -1,0 +1,101 @@
+﻿@{
+    ViewBag.Title = "مدیریت";
+    ViewBag.Description = "پنل مدیریت";
+    ViewBag.Hidden = true;
+    ViewBag.NoAside = true;
+}
+
+<div class="box">
+    <h4 style="margin-top: 0px;">مدیریت نقش ها</h4>
+    <div style="display:flex; flex-direction: row; overflow-x: scroll;">
+        <table>
+            <thead>
+            <th style="width: 100px">عنوان</th>
+            <th style="width: 250px">گذرواژه</th>
+            </thead>
+            @if (ViewBag.Roles != null)
+            {
+                foreach (ApplicationRole role in ViewBag.Roles)
+                {
+                    <tr>
+                        <td><a href="~/admin/editrole/@role.Id">@role.Name</a></td>
+                        <td>@role.Password</td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>
+<br />
+<div class="box">
+    <h4 style="margin-top: 0px;">مدیریت نقش کاربران</h4>
+    <div style="display:flex; flex-direction: row; overflow-x: scroll;">
+        <table>
+            <thead>
+            <th style="width: 200px">شناسه</th>
+            <th style="width: 100px">نام</th>
+            <th style="width: 250px">نقش</th>
+            </thead>
+            @if (ViewBag.Data != null) {
+                foreach (ApplicationUser user in ViewBag.Data.Keys)
+                {
+                    var roles = ViewBag.Data[user];
+                    <tr>
+                        <td>@user.Id</td>
+                        <td>@user.Name</td>
+                        <td>@if(roles != null) foreach (string role in roles) { <span>@role</span> }</td>
+                        <td>@if (roles != null) if (!roles.Contains("Admin") && !roles.Contains("Author"))
+                            {
+                                    <span><a href="~/admin/edituserrole/@user.Id?action=1">ارتقا به نویسنده</a>, <a href="~/admin/edituserrole/@user.Id?action=2">ارتقا به مدیر</a></span>
+                                } else if (!roles.Contains("Admin"))
+                                {
+                                    <span><a href="~/admin/edituserrole/@user.Id?action=-1">تنزل از نویسنده</a>, <a href="~/admin/edituserrole/@user.Id?action=2">ارتقا به مدیر</a></span>
+                                } else if (roles.Contains("Admin") && !roles.Contains("Author"))
+                                {
+                                    <span><a href="~/admin/edituserrole/@user.Id?action=-2">ارتقا به نویسنده</a></span>
+                                }
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>
+<br />
+<div class="box">
+    <h4 style="margin-top: 0px;">مدیریت مطالب</h4>
+    <div>
+        <a href="~/posts/add?ap=1" style="padding: 5px 10px; border-radius: 5px; color: #000; background-color: greenyellow;">افزودن</a>
+    </div>
+    <div style="display:flex; flex-direction: row; overflow-x: scroll;">
+        <table style="max-width: 100%;">
+            <thead>
+                <th style="width: 25%">عنوان</th>
+                <th style="width: 25%">عنوان</th>
+                <th style="width: 10%">انتشار</th>
+                <th style="width: 10%">ویرایش</th>
+                <th style="width: 10%">بازدید</th>
+            </thead>
+            @if (ViewBag.Posts != null)
+            {
+                foreach (PostResponseDTO post in ViewBag.Posts)
+                {
+                    <tr>
+                        <td><a href="~/posts/edit/@post.Slug?ap=1">@post.Title</a></td>
+                        <td>@post.Description</td>
+                        @if (post.Published)
+                        {
+                            <td>@post.PubDate</td>
+                        }
+                        else
+                        {
+                            <td><a href="~/posts/publish/@post.Slug?ap=1">انتشار</a></td>
+                        }
+                        <td>@post.UpDate</td>
+                        <td>@post.View</td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>

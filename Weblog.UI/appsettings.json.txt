@@ -1,0 +1,51 @@
+﻿{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+
+  "AllowedHosts": "*",
+
+  "ConnectionStrings": {
+    "DefaultConnection": "Data Source=xyz;Initial Catalog=xyz;User ID=xxx;Password=yy;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False"
+  },
+
+  "ProtectionCertificate": "Certificate_1.pfx",
+  "CertificatePass": "xxx",
+
+  "UnprotectionCertificate": "Certificate_2.pfx",
+  "UCertificatePass": "yyy",
+
+  "Serilog": {
+    "MinimumLevel": "Warning",
+    "Using": [
+      "Serilog.Sinks.Console",
+      "Serilog.Sinks.File"
+    ],
+    "WriteTo": [
+      {
+        "Name": "Console"
+      },
+      {
+        "Name": "File",
+        "Args": {
+          "path": "Logs/log.txt",
+          "rollingInterval": "Day",
+          "fileSizeLimitBytes": 1048576,
+          "rollOnFileSizeLimit": true
+        }
+      }
+    ]
+  },
+
+  "EmailSettings": {
+    "SmtpServer": "example.com",
+    "SmtpPort": "465",
+    "SmtpUser": "no-reply@example.com",
+    "SmtpPass": "xxx",
+    "SenderName": "abc",
+    "SenderEmail": "no-reply@example.com"
+  }
+}
