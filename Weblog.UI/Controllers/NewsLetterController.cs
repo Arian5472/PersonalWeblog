@@ -62,7 +62,7 @@ namespace Weblog.UI.Controllers
             if (email == null) { return BadRequest(); }
 
             int x = await _subscribersService.DeleteSubscriber(email);
-            if (x == -1) { return RedirectToAction("Home", "NotFound"); }
+            if (x == -1) { return RedirectToAction("NotFoundError", "Home"); }
 
             if (x == 0)
             {
