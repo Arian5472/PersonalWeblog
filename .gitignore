@@ -367,3 +367,4 @@ FodyWeavers.xsd
 /Weblog.UI/appsettings.json
 /Weblog.UI/wwwroot/ProtectionCertificates/Certificate_1.pfx
 /Weblog.UI/wwwroot/ProtectionCertificates/Certificate_2.pfx
+/Weblog.UI/wwwroot/DataProtectionKeys
